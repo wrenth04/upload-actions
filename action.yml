@@ -1,0 +1,23 @@
+name: upload to send.cm
+description: 'upload file to send.cm'
+author: wrenth04
+
+inputs:
+  file:
+    description: filename to upload
+    required: true
+    
+outputs:
+  url:
+    value: ${{ steps.upload.outputs.url }}
+
+runs:
+  using: composite
+  steps:
+    - name: upload to send.cm
+      id: upload
+      shell: bash -e {0}
+      run: |
+        fileid=$(curl -X POST "https://cloud11.send.cm/cgi-bin/upload.cgi" -F "file=@${{inputs.file}}" | jq -r ".[].file_code")
+        echo $fileid
+        echo "::set-output name=url::https://send.cm/$fileid"
