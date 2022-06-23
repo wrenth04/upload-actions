@@ -26,7 +26,6 @@ runs:
         host=${url%\/*}
         curl -s -X POST "$url" -F "file[]=@${{ inputs.file }}" -o /dev/null
         info_url="$host/end.pl?xid=$id"
-        echo "info_url=$info_url"
         info=$(curl -s $info_url)
         download_link=${info#*Download link}
         download_link=${download_link#*http}; download_link="http${download_link%%\"*}"
