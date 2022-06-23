@@ -19,5 +19,4 @@ runs:
       shell: bash -e {0}
       run: |
         fileid=$(curl -X POST "https://cloud11.send.cm/cgi-bin/upload.cgi" -F "file=@${{inputs.file}}" | jq -r ".[].file_code")
-        echo $fileid
         echo "::set-output name=url::https://send.cm/$fileid"
