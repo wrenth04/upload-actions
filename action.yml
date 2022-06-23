@@ -31,6 +31,5 @@ runs:
         download_link=${download_link#*http}; download_link="http${download_link%%\"*}"
         remove_link=$(echo "$info" | grep remove)
         remove_link=${remove_link#*>}; remove_link=${remove_link%%<*}
-        echo "download_link=$download_link"
         echo "::set-output name=url::$download_link"
         echo "::set-output name=remove_url::$remove_link"
